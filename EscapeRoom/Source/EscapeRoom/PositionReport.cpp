@@ -5,6 +5,7 @@
 
 #include "Classes/GameFramework/Actor.h"
 
+
 // Sets default values for this component's properties
 UPositionReport::UPositionReport()
 {
@@ -22,7 +23,20 @@ void UPositionReport::BeginPlay()
 	Super::BeginPlay();
 
 	FString ObjectName = GetOwner()->GetName();
-	UE_LOG(LogTemp, Warning, TEXT("Position report reporting for %s"), *ObjectName);
+
+	FString ObjectPos = GetOwner()->GetActorLocation().ToString();
+	/*
+	FString ObjectPos = "X = ";
+	FVector PosVector = GetOwner()->GetActorLocation();
+	FString YPos = ", Y = ", ZPos = ", Z = ";
+	ObjectPos.AppendInt(PosVector.X);
+	ObjectPos.AppendChars(*YPos, 6);
+	ObjectPos.AppendInt(PosVector.Y);
+	ObjectPos.AppendChars(*ZPos, 6);
+	ObjectPos.AppendInt(PosVector.Z);
+	*/
+
+	UE_LOG(LogTemp, Warning, TEXT("%s is at %s"), *ObjectName, *ObjectPos);
 	
 }
 
