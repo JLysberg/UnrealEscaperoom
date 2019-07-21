@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
 #include "Engine/TriggerVolume.h"
+#include "Engine/World.h"
 #include "OpenDoor.generated.h"
 
 
@@ -33,6 +34,5 @@ public:
 	UPROPERTY(EditAnywhere)
 	ATriggerVolume* PressurePlate;
 
-	UPROPERTY(EditAnywhere)
 	AActor* ActorThatOpens; //Pawn inherits from actor
 };
