@@ -3,17 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28315.86
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Engine", "Engine", "{461BA79B-C3BA-45D3-9234-751635B6F48B}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Engine", "Engine", "{E3380FD1-5925-4A3C-BA34-0B750AFE7E2B}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Games", "Games", "{3FE2F2A5-4B87-4087-8F3D-D67C4FAAB1C4}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Games", "Games", "{120F9513-A37B-4FFE-929B-39E00C0968F1}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UE4", "Intermediate\ProjectFiles\UE4.vcxproj", "{C0E56B05-61E2-4738-9519-BA98C1C0CA0F}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EscapeRoom", "Intermediate\ProjectFiles\EscapeRoom.vcxproj", "{751E677F-943C-4C45-9B3E-73CCB737289A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Visualizers", "Visualizers", "{082B5E72-EB48-4BFC-944B-064D8EC296AE}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Visualizers", "Visualizers", "{AAC42CD1-261E-43FB-A681-BEB9B9149A17}"
 	ProjectSection(SolutionItems) = preProject
-		..\..\..\Program Files\Epic Games\UE_4.22\Engine\Extras\VisualStudioDebugging\UE4.natvis = ..\..\..\Program Files\Epic Games\UE_4.22\Engine\Extras\VisualStudioDebugging\UE4.natvis
+		..\..\..\..\Program Files\Epic Games\UE_4.22\Engine\Extras\VisualStudioDebugging\UE4.natvis = ..\..\..\..\Program Files\Epic Games\UE_4.22\Engine\Extras\VisualStudioDebugging\UE4.natvis
 	EndProjectSection
 EndProject
 Global
@@ -81,7 +81,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{C0E56B05-61E2-4738-9519-BA98C1C0CA0F} = {461BA79B-C3BA-45D3-9234-751635B6F48B}
-		{751E677F-943C-4C45-9B3E-73CCB737289A} = {3FE2F2A5-4B87-4087-8F3D-D67C4FAAB1C4}
+		{C0E56B05-61E2-4738-9519-BA98C1C0CA0F} = {E3380FD1-5925-4A3C-BA34-0B750AFE7E2B}
+		{751E677F-943C-4C45-9B3E-73CCB737289A} = {120F9513-A37B-4FFE-929B-39E00C0968F1}
 	EndGlobalSection
 EndGlobal
