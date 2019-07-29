@@ -3,6 +3,10 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Classes/GameFramework/PlayerController.h"
+#include "Classes/GameFramework/Actor.h"
+#include "Engine/World.h"
+#include "DrawDebugHelpers.h"
 #include "Components/ActorComponent.h"
 #include "Grabber.generated.h"
 

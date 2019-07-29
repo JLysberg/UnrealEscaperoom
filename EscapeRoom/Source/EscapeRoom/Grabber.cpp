@@ -3,9 +3,7 @@
 
 #include "Grabber.h"
 
-#include "Classes/GameFramework/PlayerController.h"
-#include "Classes/GameFramework/Actor.h"
-#include "Engine/World.h"
+#define OUT
 
 // Sets default values for this component's properties
 UGrabber::UGrabber()
@@ -34,9 +32,13 @@ void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 	//Update player location and rotation
-	GetWorld()->GetFirstPlayerController()->GetPlayerViewPoint(Location, Rotation);
+	GetWorld()->GetFirstPlayerController()->GetPlayerViewPoint(OUT Location, OUT Rotation);
 
 	//Print location and rotation
-	UE_LOG(LogTemp, Warning, TEXT("Location: %s, Rotation: %s"), *Location.ToString(), *Rotation.ToString());
+	//UE_LOG(LogTemp, Warning, TEXT("Location: %s, Rotation: %s"), *Location.ToString(), *Rotation.ToString());
+
+	//Draw debug line
+	FVector LineTraceEnd = Location + FVector(0.f, 0.f, 50.f);
+	DrawDebugLine(GetWorld(), Location, LineTraceEnd, FColor(255, 0, 0), false, 0.f, 0.f, 10.f);
 }
 
