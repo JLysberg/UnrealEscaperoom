@@ -21,7 +21,7 @@ void UGrabber::BeginPlay()
 {
 	Super::BeginPlay();
 
-	UE_LOG(LogTemp, Warning, TEXT("Grabber operational :)"));
+	//UE_LOG(LogTemp, Warning, TEXT("Grabber operational :)"));
 	
 }
 
@@ -31,14 +31,32 @@ void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	//Update player location and rotation
+	///Update player location and rotation
+	FVector Location;
+	FRotator Rotation;
 	GetWorld()->GetFirstPlayerController()->GetPlayerViewPoint(OUT Location, OUT Rotation);
 
 	//Print location and rotation
 	//UE_LOG(LogTemp, Warning, TEXT("Location: %s, Rotation: %s"), *Location.ToString(), *Rotation.ToString());
 
-	//Draw debug line
-	FVector LineTraceEnd = Location + FVector(0.f, 0.f, 50.f);
-	DrawDebugLine(GetWorld(), Location, LineTraceEnd, FColor(255, 0, 0), false, 0.f, 0.f, 10.f);
+	///Draw debug line
+	FVector LineTraceEnd = Location + Rotation.Vector() * Reach;
+	DrawDebugLine(GetWorld(), Location, LineTraceEnd, FColor(255, 0, 0)/*, false, 0.f, 0.f, 10.f*/);
+
+	///Line trace (AKA ray-cast) to reach distance
+	FHitResult Hit;
+	GetWorld()->LineTraceSingleByObjectType(
+		OUT Hit,
+		Location,
+		LineTraceEnd,
+		FCollisionObjectQueryParams(ECollisionChannel::ECC_PhysicsBody),
+		FCollisionQueryParams(FName(TEXT("")), false, GetOwner())
+	);
+
+	///Log trace hit to output
+	AActor *ActorHit = Hit.GetActor();
+	if (ActorHit) {
+		UE_LOG(LogTemp, Warning, TEXT("Actor hit: %s"), *ActorHit->GetName());
+	}
 }
 

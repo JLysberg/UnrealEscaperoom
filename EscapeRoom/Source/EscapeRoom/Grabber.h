@@ -29,6 +29,7 @@ public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 private:
-	FVector Location;
-	FRotator Rotation;
+
+	//PLayer reach in cm
+	float Reach = 100.f;
 };
