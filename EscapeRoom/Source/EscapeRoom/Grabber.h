@@ -36,7 +36,19 @@ private:
 	UPhysicsHandleComponent* PhysicsHandle = nullptr;
 	UInputComponent* InputComponent = nullptr;
 
-	// Ray-cast and grab what's in reach
+	// Ray-cast and grab/release what's in reach
 	void Grab();
 	void Release();
+
+	//look for attached physics handle component and assign to variable
+	void FindPhysicsHandleComponent();
+
+	//Look for attached input component, assign to variable and bind keys
+	void FindInputComponent();
+
+	//Draw debug line
+	void DebugLine();
+
+	//Line Trace and return first physicsbody hit within reach
+	FHitResult GetLineTraceHit() const;
 };
