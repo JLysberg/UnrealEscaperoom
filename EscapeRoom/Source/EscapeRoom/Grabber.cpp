@@ -46,14 +46,6 @@ void UGrabber::FindPhysicsHandleComponent()
 {
 	///Look for attached Physics Handle
 	PhysicsHandle = GetOwner()->FindComponentByClass<UPhysicsHandleComponent>();
-	if (PhysicsHandle) {
-		///Physics Handle is found
-		UE_LOG(LogTemp, Warning, TEXT("Physics handle component found on %s"), *GetOwner()->GetName());
-	}
-	else {
-		///Physics Handle is not found
-		UE_LOG(LogTemp, Error, TEXT("Physics handle component not found on %s"), *GetOwner()->GetName());
-	}
 }
 
 void UGrabber::FindInputComponent()
@@ -61,44 +53,41 @@ void UGrabber::FindInputComponent()
 	///Look for attached Input component
 	InputComponent = GetOwner()->FindComponentByClass<UInputComponent>();
 	if (InputComponent) {
-		///Input Component is found
-		UE_LOG(LogTemp, Warning, TEXT("Input component found on %s"), *GetOwner()->GetName());
-
 		///Bind input axis
 		InputComponent->BindAction("Grab", EInputEvent::IE_Pressed, this, &UGrabber::Grab);
 		InputComponent->BindAction("Grab", EInputEvent::IE_Released, this, &UGrabber::Release);
-	}
-	else {
-		///Input Component is not found
-		UE_LOG(LogTemp, Error, TEXT("Input component not found on %s"), *GetOwner()->GetName());
 	}
 }
 
 void UGrabber::DebugLine()
 {
-	///Update player location and rotation
+	DrawDebugLine(GetWorld(), GetLineTraceStart(), GetLineTraceEnd(), FColor(255, 0, 0)/*, false, 0.f, 0.f, 10.f*/);
+}
+
+FVector UGrabber::GetLineTraceEnd() const
+{
 	FVector Location;
 	FRotator Rotation;
 	GetWorld()->GetFirstPlayerController()->GetPlayerViewPoint(OUT Location, OUT Rotation);
-	FVector LineTraceEnd = Location + Rotation.Vector() * Reach;
-	
-	DrawDebugLine(GetWorld(), Location, LineTraceEnd, FColor(255, 0, 0)/*, false, 0.f, 0.f, 10.f*/);
+	return Location + Rotation.Vector() * Reach;
+}
+
+FVector UGrabber::GetLineTraceStart() const
+{
+	FVector Location;
+	FRotator Rotation;
+	GetWorld()->GetFirstPlayerController()->GetPlayerViewPoint(OUT Location, OUT Rotation);
+	return Location;
 }
 
 FHitResult UGrabber::GetPhysicsBodyInReach() const
 {
-	///Find line trace end
-	FVector Location;
-	FRotator Rotation;
-	GetWorld()->GetFirstPlayerController()->GetPlayerViewPoint(OUT Location, OUT Rotation);
-	FVector LineTraceEnd = Location + Rotation.Vector() * Reach;
-
 	///Line trace (AKA ray-cast) to reach distance
 	FHitResult Hit;
 	GetWorld()->LineTraceSingleByObjectType(
 		OUT Hit,
-		Location,
-		LineTraceEnd,
+		GetLineTraceStart(),
+		GetLineTraceEnd(),
 		FCollisionObjectQueryParams(ECollisionChannel::ECC_PhysicsBody),
 		FCollisionQueryParams(FName(TEXT("")), false, GetOwner())
 	);
@@ -132,13 +121,7 @@ void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 
 	///If component grabbed, move object every frame
 	if (PhysicsHandle->GrabbedComponent) {
-		///Find line trace end
-		FVector Location;
-		FRotator Rotation;
-		GetWorld()->GetFirstPlayerController()->GetPlayerViewPoint(OUT Location, OUT Rotation);
-		FVector LineTraceEnd = Location + Rotation.Vector() * Reach;
-
-		PhysicsHandle->SetTargetLocation(LineTraceEnd);
+		PhysicsHandle->SetTargetLocation(GetLineTraceEnd());
 	}
 }
 

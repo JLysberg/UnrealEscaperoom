@@ -50,6 +50,12 @@ private:
 	//Draw debug line
 	void DebugLine();
 
+	//Return FVector at start of line trace
+	FVector GetLineTraceStart() const;
+
+	//Return FVector at end of line trace
+	FVector GetLineTraceEnd() const;
+
 	//Line Trace and return first physicsbody hit within reach
 	FHitResult GetPhysicsBodyInReach() const;
 };
