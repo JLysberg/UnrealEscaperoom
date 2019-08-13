@@ -9,6 +9,7 @@
 #include "Engine/World.h"
 #include "DrawDebugHelpers.h"
 #include "Components/ActorComponent.h"
+#include "Components/PrimitiveComponent.h"
 #include "Grabber.generated.h"
 
 
@@ -50,5 +51,5 @@ private:
 	void DebugLine();
 
 	//Line Trace and return first physicsbody hit within reach
-	FHitResult GetLineTraceHit() const;
+	FHitResult GetPhysicsBodyInReach() const;
 };
